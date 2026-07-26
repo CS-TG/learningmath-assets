@@ -22,18 +22,21 @@ timetables/grade-12/<board>/<year>/            e.g. timetables/grade-12/dbe/2026
 ## File naming convention
 
 Drop PDFs directly into the matching leaf folder (each one currently holds a `.gitkeep`
-placeholder — delete it once real files are added, or leave it, it's harmless). Name each
-file so the seed script (`tmc-learningmath/scripts/seed-past-papers.mjs`) can parse it
-automatically:
+placeholder — delete it once real files are added, or leave it, it's harmless). **No renaming
+required** — the seed script (`tmc-learningmath/scripts/seed-past-papers.mjs`) understands the
+real-world filenames straight from DBE/IEB sources:
 
 ```
-<subject>-paper<N>.pdf        e.g. maths-paper1.pdf, maths-paper2.pdf
-<subject>-memo<N>.pdf         e.g. maths-memo1.pdf, maths-memo2.pdf
-timetable.pdf                 (inside timetables/... only)
+Mathematics P1 May-June 2025 Eng.pdf          -> paper1
+Mathematics P1 May-June 2025 MG Afr & Eng.pdf -> memo1   (MG = Marking Guideline)
+Mathematics P2 Nov 2025 MG Afr & Eng.pdf      -> memo2
+timetable.pdf                                  (inside timetables/... only)
 ```
 
-`<subject>` defaults to `maths` — other subjects can be added later using the same pattern
-(e.g. `physics-paper1.pdf`) once the site supports them.
+It detects the paper number from `P1`/`P2`/`P3` and treats a filename as a memo if it contains
+the `MG` token — anywhere else, it's treated as a paper. Language tags (`Eng`, `Afr & Eng`,
+etc.) are ignored entirely. Our own shorthand convention (`maths-paper1.pdf` / `maths-memo1.pdf`)
+still works too and takes priority if present.
 
 ## Serving via jsDelivr
 
